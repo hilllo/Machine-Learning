@@ -90,7 +90,22 @@ plot(t,y1); %draw a function curves of y1 = f(t)
 y2 = cos(2*pi*4*t);
 hold on; %draw next curve on the same figure
 plot(t,y2,'r');
-xlable('time'); %lable coordinate x
-ylable('value'); %lable coordinate y
+xlabel('time'); %lable axis x
+ylabel('value'); %lable axis y
 legend('sin','cos'); %named your curve
 title('my plot');
+cd 'C:\Users\xiaoshal\MOOC\Machine-Learning\week 2'; print -dpng 'myPlot.png' %save figure as graph
+close %close the figure
+figure(1);plot(t,y1);
+figure(2);plot(t,y2); %create diff figure
+
+subplot(1,2,1) %divides plot a 1*2 grid, access 1st element
+plot(t,y1)
+subplot(1,2,2)
+plot(t,y2)
+axis([0.5 1 -1 1]) %axis x = [0.5,1] y = [-1,1]
+clf; %clear figure
+
+A = magic(5);
+imagesc(A) %create a figure, wiv diff color for diff elements
+imagesc(A),colorbar, colormap gray; %comma: execute commands at the same time
