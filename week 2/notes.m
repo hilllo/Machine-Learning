@@ -33,7 +33,7 @@ whos %details
 %save hello.mat v   %save variable v to file called hello.mat
 %clear  %??????
 
-A(3,2)  %????????
+A(3,2)  %row 3, column 2
 A(2,:)  %":" means every element along that row/column
 A([1 3],:) %all elements on 1st & 3rd rows
 A(:,2) = [10;11;12] %assign 10,11,12 to the 2nd column
