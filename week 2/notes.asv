@@ -151,25 +151,6 @@ else
     disp('The value is not one or two');
 end;
 
-%function: fileName.m (under the path) then function name is fileName()
-
-%eg1. squareThisNumber.m:
-%   function y = squareThisNumber(x) %return value
-%   y = x^2;
-%addpath('path name') %add the path to current path
-
-%eg2. squareAndCubeThisNumber.m:
-%   function [y,z] = squareAndCubeThisNumber(x) %return value
-%   y = x^2;
-%   z = x^3;
-%   command: [a,b] = squareAndCubeThisNumber(5);
-
-%eg3. costFunctionJ.m
-% function J = costFunctionJ(X,y,theta)
-% m = size(X,1);
-% predictions = X*theta;
-% examples;
-% sqrErrors = (predictions - y).^2;
-%J = 1/(2*m) * sum(sqrErrors);
+%function: fileName.m (under the path) then function name is fileName.m
 
 
