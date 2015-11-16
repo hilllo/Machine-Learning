@@ -23,7 +23,6 @@ for iter = 1:num_iters
     predictions = X*theta;
     temp = (predictions - y);
     
-    
     for i=1:thetaLen
         tempVal(i,1) = sum(temp.*X(:,i));
     end
