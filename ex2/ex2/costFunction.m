@@ -9,7 +9,7 @@ m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
 J = 0;
-grad = zeros(size(theta));
+grad = zeros(size(theta)); %grad:(n+1,1) theta:(n+1,1) ,each theta for 1 feature
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
@@ -20,11 +20,18 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+z = X * theta; %X:(m,n+1) theta:(n+1,1)
+h = sigmoid(z); %h:(m,1)
 
+%y:(m,1)
+%-y .* log(h): each elements multiply, not multiply the matrix
+J = 1 / m * sum(-y .* log(h) - (1 - y) .* log(1 - h)); %number
 
-
-
-
+thetaLen = length(theta);
+for i = 1:thetaLen
+    %(h - y) .* X(:,i): each elements multiply, not multiply the matrix
+    grad(i,1) = 1 / m * sum ((h - y) .* X(:,i));
+end
 
 
 % =============================================================
