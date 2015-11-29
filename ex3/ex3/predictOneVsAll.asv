@@ -31,13 +31,8 @@ X = [ones(m, 1) X];
 %       
 
 
-
-for j=1:m,
-	[trash,p(j)] = max(X(j,:) * all_theta');
-end;
-
-% for i = 1:num_labels,
-%     p(i) = 
+for i = 1:num_lab,
+    p(i) = 
 
 
 

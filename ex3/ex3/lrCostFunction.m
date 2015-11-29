@@ -17,6 +17,24 @@ grad = zeros(size(theta));
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
+
+z = X * theta; %X:(m,n+1) theta:(n+1,1)
+h = sigmoid(z); %h:(m,1)
+
+regTheta = theta(1:end); %means "2 to end of this vector"
+regTheta(1) =  0;
+
+%y:(m,1)
+%-y .* log(h): each elements multiply, not multiply the matrix
+J = 1 / m * sum(-y .* log(h) - (1 - y) .* log(1 - h)) + lambda / (2 * m) * sum (regTheta .^ 2); %number
+
+
+grad = (1 / m) * (X' *(h - y));
+
+temp = theta; 
+temp(1) = 0;
+
+grad = grad + (lambda / m) .* temp;
 %
 % Hint: The computation of the cost function and gradients can be
 %       efficiently vectorized. For example, consider the computation

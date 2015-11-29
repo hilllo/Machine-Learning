@@ -23,10 +23,10 @@ X = [ones(m, 1) X];
 %               parameter lambda. 
 
 initial_theta = zeros(n + 1, 1);
-options = optimset('GradObj', 'on', 'MaxIter', 50);
+options = optimset('GradObj', 'on', 'MaxIter', 400);
 for c = 1:num_labels
-    all_theta(c,:) = fminunc(@(t)(lrCostFunction(t, X, (y==c),lambda)), initial_theta, options);
-end;
+    [all_theta] = fminunc(@(t)(lrCostFunction(t, X, (y==c),lambda)), initial_theta, options);
+end
 
 
 
