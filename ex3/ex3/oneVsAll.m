@@ -31,6 +31,7 @@ initial_theta = zeros(n + 1, 1);
 options = optimset('GradObj', 'on', 'MaxIter', 50);
 
 %1 loop trains 1 class
+%here, y(results) is 1(is) or 0(isn't)
 for c = 1:num_labels %
     all_theta(c,:) = fminunc(@(t)(lrCostFunction(t, X, (y==c),lambda)), initial_theta, options);
 end;
