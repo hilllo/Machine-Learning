@@ -8,14 +8,18 @@ function [all_theta] = oneVsAll(X, y, num_labels, lambda)
 %   to the classifier for label i
 
 % Some useful variables
-m = size(X, 1);
-n = size(X, 2);
+m = size(X, 1); %rows
+n = size(X, 2); %column
 
 % You need to return the following variables correctly 
-all_theta = zeros(num_labels, n + 1);
-
+all_theta = zeros(num_labels, n + 1);	%trains num_labels logisitc regression
+%each time train 1 demo: n features
+%each CLASS has a set of thetas.
+%each set of thetas will be trained by m demoes (X), each demo has n(+1)features
+%theta(j) = s(j+1)*(s(j)+1)                                       
+                                        
 % Add ones to the X data matrix
-X = [ones(m, 1) X];
+X = [ones(m, 1) X]; %X:(m, n+1)
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the following code to train num_labels
@@ -23,8 +27,11 @@ X = [ones(m, 1) X];
 %               parameter lambda. 
 
 initial_theta = zeros(n + 1, 1);
+
 options = optimset('GradObj', 'on', 'MaxIter', 50);
-for c = 1:num_labels
+
+%1 loop trains 1 class
+for c = 1:num_labels %
     all_theta(c,:) = fminunc(@(t)(lrCostFunction(t, X, (y==c),lambda)), initial_theta, options);
 end;
 
