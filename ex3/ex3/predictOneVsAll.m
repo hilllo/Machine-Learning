@@ -30,20 +30,14 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% hypothesis: (m, class)
+% each row of hypothesis gets the percentage of the prediction of all class for 1 demo.
+hypothesis = X * all_theta';
 
-
-for j=1:m,
-	[trash,p(j)] = max(X(j,:) * all_theta');
-end;
-
-% for i = 1:num_labels,
-%     p(i) = 
-
-
-
-
-
-
+% p contains the index, ~ contains the values (rates of predition), here we need index (class,column)
+% [Y,I] = max(X,[],DIM) operates along the dimension DIM. 
+% X * all_theta' is a 2 dimension, thus DIM = 2
+[~,p] = max(hypothesis,[],2);
 
 % =========================================================================
 
