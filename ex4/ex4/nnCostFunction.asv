@@ -60,10 +60,13 @@ Y = bsxfun(@eq, y, 1:num_labels);
 % sum(sum(...)) - all restults' cost
 J = 1/m * sum(sum( -Y .* log(hypothesis) - (1-Y).* log(1-hypothesis)));
 
-% When regularized, Theta0 can 
+% When regularized, Theta0 can be ignored 
 Theta1_temp = Theta1(:,2:end);
 Theta2_temp = Theta2(:,2:end);
 
+regularized = (lambda / (2 * m))*(sum(sum(Theta1_temp .^2)) + sum(sum(Theta2_temp .^2)));
+
+J = J+regularized;
 
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -80,6 +83,22 @@ Theta2_temp = Theta2(:,2:end);
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+
+delta3 = a3 - Y;
+
+gz2 =  [ones(m,1) sigmoidGradient(z2)];
+delta2 = delta3 * Theta2 .* gz2;
+delta2 = delta2(:,2:end);
+
+Delta2 = zeros(size(Theta2));
+Delta1 = zeros(size(Theta1));
+
+Delta2 = Delta2 + delta3' * a2;
+Delta1 = Delta1 + delta2' * a1;
+
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
+
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
@@ -89,23 +108,15 @@ Theta2_temp = Theta2(:,2:end);
 %               and Theta2_grad from Part 2.
 %
 
+% Never regularize the first column of Theta (Theta0, bias)
+Theta1_grad_temp = Theta1_grad(:,2:end);
+Theta2_grad_temp = Theta2_grad(:,2:end);
 
+Theta1_grad_temp = Theta1_grad_temp + lambda / m * Theta1_temp;
+Theta2_grad_temp = Theta2_grad_temp + lambda / m * Theta2_temp;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad(:,2:end) = Theta1_grad_temp;
+Theta2_grad(:,2:end) = Theta2_grad_temp;
 
 % -------------------------------------------------------------
 
